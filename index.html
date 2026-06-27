@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miguel Cantarino - Desenvolvedor Web PHP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --roxo-profundo: #21094e;
+            --roxo-vibrante: #6f42c1;
+            --roxo-titulo: #2d0a4e;
+        }
+        .bg-purple-dark { background-color: var(--roxo-profundo) !important; }
+        .text-purple-title { color: var(--roxo-titulo); }
+        .btn-purple { 
+            background-color: var(--roxo-vibrante); 
+            color: white;
+            border: none;
+        }
+        .btn-purple:hover {
+            background-color: #5a32a3;
+            color: white;
+        }
+        .project-card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            object-position: top center;
+            background-color: #1a1a2e;
+        }
+        .project-card-img-contain {
+            object-fit: contain;
+            object-position: center;
+        }
+        .project-preview {
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+        .project-preview:hover {
+            opacity: 0.85;
+        }
+        .project-modal-img {
+            max-height: 70vh;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+        }
+        .badge-tech {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
+            margin: 0.3rem;
+        }
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--roxo-vibrante);
+        }
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: var(--roxo-vibrante);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px var(--roxo-vibrante);
+        }
+        .pricing-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .pricing-card:hover {
+            border-color: var(--roxo-vibrante);
+            box-shadow: 0 10px 30px rgba(111, 66, 193, 0.15);
+            transform: translateY(-5px);
+        }
+        .pricing-card.featured {
+            border-color: var(--roxo-vibrante);
+            background: linear-gradient(135deg, rgba(111, 66, 193, 0.05) 0%, rgba(111, 66, 193, 0.02) 100%);
+        }
+        .badge-disponivel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-left: 4px solid var(--roxo-vibrante);
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .process-step {
+            text-align: center;
+            padding: 2rem;
+        }
+        .process-step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--roxo-vibrante);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .diferencial-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        .diferencial-icon {
+            font-size: 1.5rem;
+            color: var(--roxo-vibrante);
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--roxo-vibrante);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .social-links a:hover {
+            background: #5a32a3;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="bg-white">
+
+    <header class="bg-purple-dark text-white text-center p-5 position-relative">
+        <div class="badge-disponivel">
+            <span class="badge bg-success">
+                <i class="bi bi-circle-fill me-1"></i> Disponível para novos projetos
+            </span>
+        </div>
+        <h1 class="fw-bold mb-2">Miguel Cantarino</h1>
+        <p class="lead">Desenvolvedor Web PHP | MySQL | JavaScript</p>
+        <p class="text-secondary">Construo sistemas rápidos, seguros e escaláveis para o seu negócio.</p>
+    </header>
+
+    <section class="container py-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="fw-bold text-purple-title mb-4">Sobre Mim</h2>
+                <p class="text-secondary" style="font-size: 1.05rem; line-height: 1.8;">
+                    Olá! Meu nome é <strong>Miguel Cantarino</strong>, sou de <strong>Ribeirão Pires, SP</strong>. 
+                    Minha jornada na tecnologia começou pela curiosidade de entender como as ferramentas do dia a dia 
+                    são construídas. Atualmente, sou técnico em desenvolvimento pela <strong>SENAI</strong> com especialização 
+                    em <strong>PHP</strong> e <strong>MySQL</strong>, focado em criar soluções web profissionais que resolvem 
+                    problemas reais de negócios.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TECNOLOGIAS -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-purple-title fw-bold mb-5 text-center">Tecnologias que domino</h2>
+            <div class="row text-center">
+                <div class="col-md-6">
+                    <h5 class="fw-bold text-purple-title mb-3">Back-end</h5>
+                    <div class="mb-4">
+                        <span class="badge badge-tech bg-primary">PHP 8+</span>
+                        <span class="badge badge-tech bg-success">MySQL/MariaDB</span>
+                        <span class="badge badge-tech bg-info">PDO</span>
+                        <span class="badge badge-tech bg-warning text-dark">Sessions</span>
+                        <span class="badge badge-tech bg-danger">MVC</span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="fw-bold text-purple-title mb-3">Front-end</h5>
+                    <div class="mb-4">
+                        <span class="badge badge-tech bg-primary">HTML5</span>
+                        <span class="badge badge-tech bg-success">CSS3</span>
+                        <span class="badge badge-tech bg-info">Bootstrap 5</span>
+                        <span class="badge badge-tech bg-warning text-dark">JavaScript</span>
+                        <span class="badge badge-tech bg-danger">Responsivo</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-12">
+                    <h5 class="fw-bold text-purple-title mb-3">Ferramentas & Práticas</h5>
+                    <div>
+                        <span class="badge badge-tech bg-dark">Git/GitHub</span>
+                        <span class="badge badge-tech bg-secondary">Cursor AI</span>
+                        <span class="badge badge-tech bg-dark">XAMPP</span>
+                        <span class="badge badge-tech bg-secondary">Postman</span>
+                        <span class="badge badge-tech bg-dark">phpMyAdmin</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIFERENCIAIS -->
+    <section class="container py-5">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="fw-bold text-purple-title mb-5 text-center">Por que me contratar?</h2>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="diferencial-item">
+                            <div class="diferencial-icon">
+                                <i class="bi bi-lightning-charge-fill"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-purple-title">Sistemas Rápidos</h5>
+                                <p class="text-secondary small">Performance e otimização desde a primeira linha de código.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="diferencial-item">
+                            <div class="diferencial-icon">
+                                <i class="bi bi-shield-check"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-purple-title">Código Seguro</h5>
+                                <p class="text-secondary small">Proteção contra SQL Injection, XSS e outras vulnerabilidades comuns.</p>
+                            </div>
+                        </div>
+
+                        <div class="diferencial-item">
+                            <div class="diferencial-icon">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-purple-title">Entrega no Prazo</h5>
+                                <p class="text-secondary small">Comprometido com prazos acordados e qualidade garantida.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="diferencial-item">
+                            <div class="diferencial-icon">
+                                <i class="bi bi-target"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-purple-title">Foco no Cliente</h5>
+                                <p class="text-secondary small">Soluções pensadas para resolver seus problemas reais de negócio.</p>
+                            </div>
+                        </div>
+
+                        <div class="diferencial-item">
+                            <div class="diferencial-icon">
+                                <i class="bi bi-file-text"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-purple-title">Documentação Completa</h5>
+                                <p class="text-secondary small">Código comentado e documentação técnica para facilitar manutenção.</p>
+                            </div>
+                        </div>
+
+                        <div class="diferencial-item">
+                            <div class="diferencial-icon">
+                                <i class="bi bi-headset"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-purple-title">Suporte Pós-Entrega</h5>
+                                <p class="text-secondary small">30 dias de suporte técnico gratuito após entrega do projeto.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIÊNCIA -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-purple-title mb-5 text-center">Minha Trajetória</h2>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h5 class="fw-bold text-purple-title">Técnico em Desenvolvimento - SENAI</h5>
+                            <p class="text-muted small">2025 - Presente</p>
+                            <p class="text-secondary">Formação técnica em desenvolvimento web com foco em PHP, MySQL e boas práticas de programação.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5 class="fw-bold text-purple-title">5+ Projetos Entregues</h5>
+                            <p class="text-muted small">2026 - Presente</p>
+                            <p class="text-secondary">CRUDs, sistemas de locação, painéis administrativos, orçamentos e gerenciadores de dados.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5 class="fw-bold text-purple-title">Especialização em Back-end</h5>
+                            <p class="text-muted small">2026 - Presente</p>
+                            <p class="text-secondary">Desenvolvimento de APIs seguras, validações robustas, autenticação e banco de dados avançado.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h5 class="fw-bold text-purple-title">Mentalidade de Aprendizado Contínuo</h5>
+                            <p class="text-muted small">Always</p>
+                            <p class="text-secondary">Estudo constantemente novas práticas, padrões de design e otimizações para entregar o melhor.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESSO DE TRABALHO -->
+    <section class="container py-5">
+        <h2 class="fw-bold text-purple-title mb-5 text-center">Como trabalho?</h2>
+        
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <h5 class="fw-bold text-purple-title">Consultoria</h5>
+                    <p class="text-secondary small">Entendo sua necessidade, analiso requisitos e defino a melhor solução.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <h5 class="fw-bold text-purple-title">Proposta</h5>
+                    <p class="text-secondary small">Envio orçamento detalhado com prazos, escopo e próximos passos.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <h5 class="fw-bold text-purple-title">Desenvolvimento</h5>
+                    <p class="text-secondary small">Código profissional, atualizações periódicas e comunicação transparente.</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3">
+                <div class="process-step">
+                    <div class="process-step-number">4</div>
+                    <h5 class="fw-bold text-purple-title">Entrega + Suporte</h5>
+                    <p class="text-secondary small">Sistema pronto, documentação e 30 dias de suporte técnico gratuito.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PREÇOS -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-purple-title mb-5 text-center">Tabela de Preços</h2>
+            <p class="text-center text-secondary mb-5">Valores referenciais. Cada projeto tem suas especificidades. <strong>Solicite um orçamento sem compromisso!</strong></p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="pricing-card p-4 h-100">
+                        <h5 class="fw-bold text-purple-title mb-3">Landing Page</h5>
+                        <h3 class="fw-bold text-purple-title mb-3">R$ 1.500<span class="fs-6 text-muted">/projeto</span></h3>
+                        <ul class="list-unstyled text-secondary small">
+                            <li class="mb-2">✓ Responsiva (desktop/mobile)</li>
+                            <li class="mb-2">✓ SEO básico</li>
+                            <li class="mb-2">✓ Formulário de contato</li>
+                            <li class="mb-2">✓ Até 5 páginas</li>
+                            <li class="mb-2">✓ Suporte 15 dias</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="pricing-card featured p-4 h-100">
+                        <h5 class="fw-bold text-purple-title mb-3">Sistema CRUD</h5>
+                        <h3 class="fw-bold text-purple-title mb-3">R$ 3.000<span class="fs-6 text-muted">/projeto</span></h3>
+                        <ul class="list-unstyled text-secondary small">
+                            <li class="mb-2">✓ Banco de dados MySQL</li>
+                            <li class="mb-2">✓ CRUD completo (criar/editar/deletar)</li>
+                            <li class="mb-2">✓ Autenticação com sessions</li>
+                            <li class="mb-2">✓ Validações robustas</li>
+                            <li class="mb-2">✓ Suporte 30 dias</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="pricing-card p-4 h-100">
+                        <h5 class="fw-bold text-purple-title mb-3">Sistema Complexo</h5>
+                        <h3 class="fw-bold text-purple-title mb-3">A consultar</h3>
+                        <ul class="list-unstyled text-secondary small">
+                            <li class="mb-2">✓ Múltiplas tabelas relacionadas</li>
+                            <li class="mb-2">✓ Relatórios e gráficos</li>
+                            <li class="mb-2">✓ API REST</li>
+                            <li class="mb-2">✓ Otimizações avançadas</li>
+                            <li class="mb-2">✓ Suporte 60 dias</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-lg-8 mx-auto p-4 bg-white rounded-3 shadow-sm text-center border border-purple">
+                    <h4 class="fw-bold text-purple-title mb-3">💬 Não tem certeza do que precisa?</h4>
+                    <p class="text-secondary mb-4">Fale comigo! Faço consultoria gratuita e monto um orçamento personalizado para seu projeto.</p>
+                    <a href="https://wa.me/5511977757684" class="btn btn-purple me-2">
+                        <i class="bi bi-whatsapp"></i> Conversar via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MEUS PROJETOS -->
+    <section class="container py-5">
+        <h2 class="text-purple-title fw-bold mb-4 text-center">Meus Projetos</h2>
+        <p class="text-center text-secondary mb-5">Trabalhos realizados com foco em qualidade, segurança e performance.</p>
+        
+        <div class="row g-4 mt-2">
+            <div class="col-12 col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="img/img_playlist.PNG"
+                         class="card-img-top project-card-img project-preview"
+                         alt="Print do Sistema de Playlist"
+                         data-title="Sistema de Playlist PHP"
+                         data-description="Painel CRUD seguro para gerenciar músicas e cálculo automático de descontos. Implementado com validações robustas e proteção contra SQL Injection.">
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="card-title fw-bold text-purple-title">Sistema de Playlist PHP</h5>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            <span class="badge bg-info me-1">PHP</span>
+                            <span class="badge bg-success me-1">MySQL</span>
+                            <span class="badge bg-primary">CRUD</span>
+                        </p>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            Gerencia dados de empresas com cálculo automático de descontos em músicas. 
+                            Banco de dados normalizado com validações de entrada.
+                        </p>
+                        <a href="https://github.com/miglizz08/gerenciador_de_musicas" class="btn btn-purple mt-3">
+                            <i class="bi bi-github"></i> Ver no GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="img/img_orcamento02.PNG"
+                         class="card-img-top project-card-img project-card-img-contain project-preview"
+                         alt="Print do Sistema de Orçamentos"
+                         data-title="Gerenciador de Orçamentos"
+                         data-description="Sistema com conexão PDO segura, tratamento de exceções robusto e colunas calculadas dinamicamente no MySQL. Gera orçamentos automaticamente com cálculos precisos.">
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="card-title fw-bold text-purple-title">Gerenciador de Orçamentos</h5>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            <span class="badge bg-info me-1">PHP</span>
+                            <span class="badge bg-success me-1">PDO</span>
+                            <span class="badge bg-warning text-dark">Cálculos</span>
+                        </p>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            Gera orçamentos com cálculos automáticos, tratamento de exceções e 
+                            validação de dados. Conexão segura com banco de dados via PDO.
+                        </p>
+                        <a href="https://github.com/miglizz08/sistema-orcamentos" class="btn btn-purple mt-3">
+                            <i class="bi bi-github"></i> Ver no GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <div class="card h-100 shadow-sm">
+                    <img src="img/img_wattron.PNG"
+                         class="card-img-top project-card-img project-preview"
+                         alt="Print da WATTRON"
+                         data-title="Wattron - Sistema de Locação de Máquinas"
+                         data-description="Projeto acadêmico complexo: sistema de locação de máquinas industriais com validação de disponibilidade, cálculo de multa por atraso, painel de controle e orçamentos dinâmicos.">
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="card-title fw-bold text-purple-title">Wattron - Locadora de Máquinas</h5>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            <span class="badge bg-info me-1">PHP</span>
+                            <span class="badge bg-success me-1">MySQL</span>
+                            <span class="badge bg-warning text-dark">Complexo</span>
+                        </p>
+                        <p class="card-text text-secondary small flex-grow-1">
+                            Sistema completo de locação: validação de disponibilidade com trava inteligente, 
+                            cálculo de multas, painel de controle, orçamentos e relatórios.
+                        </p>
+                        <a href="https://github.com/miglizz08/WATTRON" class="btn btn-purple mt-3">
+                            <i class="bi bi-github"></i> Ver no GitHub
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="fw-bold text-purple-title mb-5 text-center">Dúvidas Frequentes</h2>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item border-0 mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    Quanto tempo leva para desenvolver um projeto?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    Depende da complexidade. Uma landing page leva 5-7 dias, um CRUD simples 10-15 dias, e sistemas mais complexos 3-6 semanas. Após a consultoria, passarei um prazo realista.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-0 mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Vocês oferecem manutenção após a entrega?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    Sim! Todos os projetos incluem 30 dias de suporte técnico gratuito. Após isso, ofereço pacotes de manutenção mensais conforme necessidade.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-0 mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    O código é seguro contra hackers?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    Implemento as melhores práticas de segurança: proteção contra SQL Injection, XSS, CSRF, criptografia de senhas com bcrypt, validações de entrada e saída. O código é regularmente atualizado com patches de segurança.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-0 mb-3">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Posso fazer alterações no código após a entrega?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    Sim! Entrego código bem documentado e comentado. Durante os 30 dias de suporte, faço as alterações solicitadas. Após esse período, cobro pela hora trabalhada.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item border-0">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    Qual a forma de pagamento?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body text-secondary">
+                                    Aceito PIX, transferência bancária e cartão de crédito. Para projetos maiores, faço 50% na contratação e 50% na entrega. Discutimos os termos durante a consultoria.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTATO FINAL -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="fw-bold text-purple-title mb-4">Vamos tirar seu projeto do papel?</h2>
+                    <p class="text-secondary mb-5" style="font-size: 1.1rem;">
+                        Estou pronto para conversar sobre sua ideia e transformá-la em realidade. 
+                        Escolha a melhor forma de falar comigo:
+                    </p>
+
+                    <div class="d-grid gap-3 mb-5">
+                        <a href="https://wa.me/5511977757684" class="btn btn-success btn-lg shadow-sm">
+                            <i class="bi bi-whatsapp me-2"></i> Conversar pelo WhatsApp
+                        </a>
+                        <a href="mailto:cantarino.dev.08@gmail.com" class="btn btn-purple btn-lg shadow-sm">
+                            <i class="bi bi-envelope-fill me-2"></i> Enviar um E-mail
+                        </a>
+                    </div>
+
+                    <div class="mb-4">
+                        <p class="text-secondary fw-bold mb-3">Ou me encontre em:</p>
+                        <div class="social-links">
+                            <a href="https://github.com/miglizz08" title="GitHub" target="_blank">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <a href="https://www.instagram.com/cantarino_migxzzz/" title="Instagram" target="_blank">
+                                <i class="bi bi-instagram"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-purple-dark text-white text-center p-4 mt-5">
+        <p class="mb-2">© 2026 Miguel Cantarino - Desenvolvedor Web PHP | MySQL</p>
+        <p class="small text-secondary mb-0">Contato: cantarino.dev.08@gmail.com | WhatsApp: (11) 97775-7684</p>
+    </footer>
+
+    <div class="modal fade" id="projectImageModal" tabindex="-1" aria-labelledby="projectImageModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-purple-title" id="projectImageModalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body text-center bg-dark rounded-3 mx-3 mb-3 p-2">
+                    <img id="projectImageModalImg" src="" alt="" class="project-modal-img">
+                </div>
+                <div class="modal-footer border-0 pt-0 justify-content-center">
+                    <p id="projectImageModalDesc" class="text-secondary small text-center mb-0"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const projectImageModal = document.getElementById('projectImageModal');
+        const modalTitle = document.getElementById('projectImageModalTitle');
+        const modalImg = document.getElementById('projectImageModalImg');
+        const modalDesc = document.getElementById('projectImageModalDesc');
+        const modal = new bootstrap.Modal(projectImageModal);
+
+        document.querySelectorAll('.project-preview').forEach(function (img) {
+            img.addEventListener('click', function () {
+                modalTitle.textContent = img.dataset.title;
+                modalDesc.textContent = img.dataset.description;
+                modalImg.src = img.src;
+                modalImg.alt = img.alt;
+                modal.show();
+            });
+        });
+    </script>
+
+</body>
+</html>
